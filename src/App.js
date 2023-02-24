@@ -47,7 +47,7 @@ function App() {
       <Search onSearch={searchHandler} />
       <Divider>Food List</Divider>
       <Row style={{ width: '100%', justifyContent: 'center' }}>
-        {filteredFoodList.map((foodItem) => (
+        {filteredFoodList.length !== 0 ? filteredFoodList.map((foodItem) => (
           <FoodBox
             key={foodItem.name}
             food={{
@@ -58,7 +58,7 @@ function App() {
             }}
             onDelete={deleteItemHandler}
           />
-        ))}
+        )) : <p>oops! There is no more content to show!</p> }
       </Row>
     </div>
   );

@@ -9,7 +9,6 @@ export default function Search (props) {
         <Col>
           <Divider>Search</Divider>
     
-          <label>Search</label>
           <Input type="text" onChange={searchHandler} />
         </Col>
       );
