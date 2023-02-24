@@ -11,20 +11,19 @@ function App() {
   return (
     <div className="App">
       <h1>Food List</h1>
-      <FoodBox
-        food={{
-          name: 'Orange',
-          calories: 85,
-          image: 'https://i.imgur.com/abKGOcv.jpg',
-          servings: 1,
-        }}
-      />
-      {foodList.map((foodItem) => (
-        <div>
-          <p> {foodItem.name} </p>
-          <img src={foodItem.image} width={150} alt={foodItem.name} />
-        </div>
-      ))}
+      <div className="food-list">
+        {foodList.map((foodItem) => (
+          <FoodBox
+            key={foodItem.name}
+            food={{
+              name: foodItem.name,
+              calories: foodItem.calories,
+              image: foodItem.image,
+              servings: foodItem.servings,
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
 }
