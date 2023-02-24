@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import AddFoodForm from './components/AddFoodForm';
 import Search from './components/Search';
@@ -10,13 +10,22 @@ import foods from './foods.json';
 function App() {
   const [foodList, setFoodList] = useState(foods);
   const [filteredFoodList, setFilteredFoodList] = useState(foods);
+  const [search, setSearch] = useState('')
+
+  useEffect(()=>{
+    setFilteredFoodList(foodList.filter(foodItem => foodItem.name.toLowerCase().includes(search.toLowerCase())))
+  },[search, foodList])
 
   const addFoodHandler = (foodObject) => {
     setFoodList(currState => [...currState, foodObject])
   }
 
   const searchHandler = (searchSting) => {
-    setFilteredFoodList(foodList.filter(foodItem => foodItem.name.toLowerCase().includes(searchSting.toLowerCase())))
+    setSearch(searchSting)
+  }
+
+  const deleteItemHandler = (itemName) => {
+    setFoodList(foodList.filter(foodItem => foodItem.name !== itemName))
   }
 
   return (
@@ -34,6 +43,7 @@ function App() {
               image: foodItem.image,
               servings: foodItem.servings,
             }}
+            onDelete={deleteItemHandler}
           />
         ))}
       </div>
